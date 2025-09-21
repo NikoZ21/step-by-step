@@ -1,0 +1,165 @@
+{
+  "designSystem": {
+    "colors": {
+      "primary": {
+        "background": "#2A2A2E",
+        "surface": "#3A3A3E",
+        "surfaceLight": "#4A4A4E"
+      },
+      "accent": {
+        "blue": "#4A90E2",
+        "orange": "#FF6B35",
+        "cyan": "#00D4AA",
+        "brightBlue": "#007AFF"
+      },
+      "text": {
+        "primary": "#FFFFFF",
+        "secondary": "#B0B0B0",
+        "muted": "#808080"
+      },
+      "status": {
+        "success": "#00D4AA",
+        "warning": "#FF6B35",
+        "info": "#4A90E2"
+      },
+      "semantic": {
+        "meetings": "#FF6B35",
+        "trip": "#00D4AA",
+        "inbox": "#4A90E2"
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "primary": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+      },
+      "fontSize": {
+        "xs": "12px",
+        "sm": "14px",
+        "base": "16px",
+        "lg": "18px",
+        "xl": "20px",
+        "2xl": "24px",
+        "3xl": "32px"
+      },
+      "fontWeight": {
+        "normal": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700
+      }
+    },
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "20px",
+      "2xl": "24px",
+      "3xl": "32px"
+    },
+    "borderRadius": {
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "20px",
+      "full": "9999px"
+    },
+    "components": {
+      "card": {
+        "backgroundColor": "#3A3A3E",
+        "borderRadius": "16px",
+        "padding": "20px",
+        "shadow": "0 4px 12px rgba(0, 0, 0, 0.3)"
+      },
+      "progressRing": {
+        "strokeWidth": "6px",
+        "size": "80px",
+        "colors": {
+          "inbox": "#4A90E2",
+          "meetings": "#FF6B35",
+          "trip": "#00D4AA"
+        }
+      },
+      "projectCard": {
+        "backgroundColor": "#3A3A3E",
+        "borderRadius": "12px",
+        "padding": "16px",
+        "minHeight": "120px"
+      },
+      "taskItem": {
+        "backgroundColor": "transparent",
+        "padding": "12px 0",
+        "borderBottom": "1px solid #4A4A4E"
+      },
+      "calendarDay": {
+        "active": {
+          "backgroundColor": "#007AFF",
+          "color": "#FFFFFF",
+          "borderRadius": "50%"
+        },
+        "inactive": {
+          "backgroundColor": "transparent",
+          "color": "#B0B0B0"
+        }
+      },
+      "timelineEvent": {
+        "padding": "8px 0",
+        "borderLeft": "3px solid",
+        "paddingLeft": "12px",
+        "marginLeft": "8px"
+      },
+      "fab": {
+        "backgroundColor": "#007AFF",
+        "borderRadius": "50%",
+        "size": "56px",
+        "shadow": "0 4px 16px rgba(0, 122, 255, 0.3)"
+      },
+      "header": {
+        "backgroundColor": "#2A2A2E",
+        "padding": "12px 20px",
+        "borderRadius": "20px 20px 0 0"
+      }
+    },
+    "layout": {
+      "containerPadding": "20px",
+      "cardSpacing": "16px",
+      "sectionSpacing": "32px"
+    },
+    "animations": {
+      "duration": {
+        "fast": "150ms",
+        "normal": "300ms",
+        "slow": "500ms"
+      },
+      "easing": {
+        "ease": "ease",
+        "easeInOut": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "easeOut": "cubic-bezier(0, 0, 0.2, 1)"
+      }
+    }
+  },
+  "usage": {
+    "examples": {
+      "css": {
+        "card": {
+          "backgroundColor": "var(--color-surface)",
+          "borderRadius": "var(--radius-lg)",
+          "padding": "var(--spacing-xl)",
+          "boxShadow": "0 4px 12px rgba(0, 0, 0, 0.3)"
+        },
+        "primaryButton": {
+          "backgroundColor": "var(--color-accent-blue)",
+          "color": "var(--color-text-primary)",
+          "borderRadius": "var(--radius-full)",
+          "padding": "var(--spacing-md) var(--spacing-xl)"
+        }
+      },
+      "tailwind": {
+        "card": "bg-gray-800 rounded-2xl p-5 shadow-xl",
+        "primaryButton": "bg-blue-500 text-white rounded-full px-5 py-3",
+        "accentOrange": "text-orange-500",
+        "accentCyan": "text-cyan-400"
+      }
+    }
+  }
+}
