@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+
 import { Task, TaskStep } from "../temporary/dummydata";
 
 // Temporary fallback to emojis while we debug the icon library

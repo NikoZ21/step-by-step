@@ -42,7 +42,7 @@ const getCompletedSteps = (steps: TaskStep[]) => {
   return steps.filter((step) => step.completed).length;
 };
 
-export default function TaskModal({
+export default function InProgressTaskModal({
   visible,
   task,
   onClose,
@@ -195,6 +195,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#B0B0B0",
     paddingHorizontal: 24,
+    paddingTop: 8,
     paddingBottom: 20,
     lineHeight: 24,
   },

@@ -6,12 +6,14 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  SafeAreaView,
 } from "react-native";
-import { dummyTasks, Task, TaskStep } from "./temporary/dummydata";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import TaskCard from "./components/TaskCard";
-import TaskModal from "./components/TaskModal";
+import InProgressTaskModal from "./components/InProgressTaskModal";
 import AddNewTaskModal from "./components/AddNewTaskModal";
+
+import { dummyTasks, Task, TaskStep } from "./temporary/dummydata";
 
 // Icon handling moved to individual components
 
@@ -80,7 +82,7 @@ export default function App() {
   // Step rendering logic moved to TaskModal component
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
 
       {/* Header */}
@@ -112,7 +114,7 @@ export default function App() {
       />
 
       {/* Task Detail Modal */}
-      <TaskModal
+      <InProgressTaskModal
         visible={modalVisible}
         task={selectedTask}
         onClose={closeModal}
@@ -127,7 +129,7 @@ export default function App() {
         onUpdateTask={handleUpdateNewTask}
         onCreateTask={handleCreateTask}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

@@ -1,165 +1,230 @@
 {
-  "designSystem": {
-    "colors": {
-      "primary": {
-        "background": "#2A2A2E",
-        "surface": "#3A3A3E",
-        "surfaceLight": "#4A4A4E"
-      },
-      "accent": {
-        "blue": "#4A90E2",
-        "orange": "#FF6B35",
-        "cyan": "#00D4AA",
-        "brightBlue": "#007AFF"
-      },
-      "text": {
-        "primary": "#FFFFFF",
-        "secondary": "#B0B0B0",
-        "muted": "#808080"
-      },
-      "status": {
-        "success": "#00D4AA",
-        "warning": "#FF6B35",
-        "info": "#4A90E2"
-      },
-      "semantic": {
-        "meetings": "#FF6B35",
-        "trip": "#00D4AA",
-        "inbox": "#4A90E2"
-      }
-    },
-    "typography": {
-      "fontFamily": {
-        "primary": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-      },
-      "fontSize": {
-        "xs": "12px",
-        "sm": "14px",
-        "base": "16px",
-        "lg": "18px",
-        "xl": "20px",
-        "2xl": "24px",
-        "3xl": "32px"
-      },
-      "fontWeight": {
-        "normal": 400,
-        "medium": 500,
-        "semibold": 600,
-        "bold": 700
-      }
-    },
-    "spacing": {
-      "xs": "4px",
-      "sm": "8px",
-      "md": "12px",
-      "lg": "16px",
-      "xl": "20px",
-      "2xl": "24px",
-      "3xl": "32px"
-    },
-    "borderRadius": {
-      "sm": "8px",
-      "md": "12px",
-      "lg": "16px",
-      "xl": "20px",
-      "full": "9999px"
-    },
-    "components": {
-      "card": {
-        "backgroundColor": "#3A3A3E",
-        "borderRadius": "16px",
-        "padding": "20px",
-        "shadow": "0 4px 12px rgba(0, 0, 0, 0.3)"
-      },
-      "progressRing": {
-        "strokeWidth": "6px",
-        "size": "80px",
-        "colors": {
-          "inbox": "#4A90E2",
-          "meetings": "#FF6B35",
-          "trip": "#00D4AA"
-        }
-      },
-      "projectCard": {
-        "backgroundColor": "#3A3A3E",
-        "borderRadius": "12px",
-        "padding": "16px",
-        "minHeight": "120px"
-      },
-      "taskItem": {
-        "backgroundColor": "transparent",
-        "padding": "12px 0",
-        "borderBottom": "1px solid #4A4A4E"
-      },
-      "calendarDay": {
-        "active": {
-          "backgroundColor": "#007AFF",
-          "color": "#FFFFFF",
-          "borderRadius": "50%"
+  "themes": {
+    "dark": {
+      "colors": {
+        "background": {
+          "primary": "#1A1A1E",
+          "secondary": "#262629",
+          "tertiary": "#4A4A4E"
         },
-        "inactive": {
-          "backgroundColor": "transparent",
-          "color": "#B0B0B0"
+        "text": {
+          "primary": "#FFFFFF",
+          "secondary": "#F8F8F8",
+          "tertiary": "#B0B0B0",
+          "placeholder": "#B0B0B0"
+        },
+        "accent": {
+          "primary": "#4A90E2",
+          "success": "#00D4AA",
+          "danger": "#FF6B35"
+        },
+        "border": {
+          "primary": "#4A4A4E",
+          "secondary": "#4A90E2"
+        },
+        "overlay": {
+          "modal": "rgba(0, 0, 0, 0.8)"
+        },
+        "shadow": {
+          "color": "#000",
+          "opacity": 0.25
         }
       },
-      "timelineEvent": {
-        "padding": "8px 0",
-        "borderLeft": "3px solid",
-        "paddingLeft": "12px",
-        "marginLeft": "8px"
+      "typography": {
+        "fontSize": {
+          "xs": 12,
+          "sm": 14,
+          "base": 16,
+          "lg": 18,
+          "xl": 20,
+          "2xl": 24,
+          "3xl": 28
+        },
+        "fontWeight": {
+          "light": "300",
+          "regular": "400",
+          "medium": "500",
+          "semibold": "600",
+          "bold": "700"
+        },
+        "lineHeight": {
+          "tight": 20,
+          "normal": 22,
+          "relaxed": 24
+        },
+        "letterSpacing": {
+          "tight": -0.5,
+          "normal": 0
+        }
       },
-      "fab": {
-        "backgroundColor": "#007AFF",
-        "borderRadius": "50%",
-        "size": "56px",
-        "shadow": "0 4px 16px rgba(0, 122, 255, 0.3)"
+      "spacing": {
+        "xs": 4,
+        "sm": 8,
+        "base": 12,
+        "md": 16,
+        "lg": 20,
+        "xl": 24,
+        "2xl": 28
       },
-      "header": {
-        "backgroundColor": "#2A2A2E",
-        "padding": "12px 20px",
-        "borderRadius": "20px 20px 0 0"
-      }
-    },
-    "layout": {
-      "containerPadding": "20px",
-      "cardSpacing": "16px",
-      "sectionSpacing": "32px"
-    },
-    "animations": {
-      "duration": {
-        "fast": "150ms",
-        "normal": "300ms",
-        "slow": "500ms"
+      "borderRadius": {
+        "sm": 2,
+        "base": 6,
+        "md": 8,
+        "lg": 12,
+        "xl": 16,
+        "2xl": 20,
+        "full": 50
       },
-      "easing": {
-        "ease": "ease",
-        "easeInOut": "cubic-bezier(0.4, 0, 0.2, 1)",
-        "easeOut": "cubic-bezier(0, 0, 0.2, 1)"
+      "shadows": {
+        "small": {
+          "shadowColor": "#000",
+          "shadowOffset": { "width": 0, "height": 2 },
+          "shadowOpacity": 0.25,
+          "shadowRadius": 4,
+          "elevation": 5
+        },
+        "medium": {
+          "shadowColor": "#000",
+          "shadowOffset": { "width": 0, "height": 4 },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 12,
+          "elevation": 8
+        }
       }
     }
   },
-  "usage": {
-    "examples": {
-      "css": {
-        "card": {
-          "backgroundColor": "var(--color-surface)",
-          "borderRadius": "var(--radius-lg)",
-          "padding": "var(--spacing-xl)",
-          "boxShadow": "0 4px 12px rgba(0, 0, 0, 0.3)"
-        },
-        "primaryButton": {
-          "backgroundColor": "var(--color-accent-blue)",
-          "color": "var(--color-text-primary)",
-          "borderRadius": "var(--radius-full)",
-          "padding": "var(--spacing-md) var(--spacing-xl)"
-        }
-      },
-      "tailwind": {
-        "card": "bg-gray-800 rounded-2xl p-5 shadow-xl",
-        "primaryButton": "bg-blue-500 text-white rounded-full px-5 py-3",
-        "accentOrange": "text-orange-500",
-        "accentCyan": "text-cyan-400"
+  "components": {
+    "App": {
+      "usedColors": {
+        "background": "#1A1A1E",
+        "headerBorder": "#4A4A4E",
+        "title": "#FFFFFF",
+        "subtitle": "#B0B0B0",
+        "addButton": "#4A90E2",
+        "addButtonText": "#FFFFFF"
+      }
+    },
+    "TaskCard": {
+      "usedColors": {
+        "background": "#262629",
+        "title": "#4A90E2",
+        "description": "#F8F8F8",
+        "stepCounterBackground": "#4A90E2",
+        "stepCounterText": "#FFFFFF",
+        "progressBackground": "#4A4A4E",
+        "progressFill": "#00D4AA",
+        "progressText": "#B0B0B0",
+        "icon": "#4A90E2"
+      }
+    },
+    "InProgressTaskModal": {
+      "usedColors": {
+        "modalOverlay": "rgba(0, 0, 0, 0.8)",
+        "modalBackground": "#262629",
+        "modalBorder": "#4A4A4E",
+        "title": "#FFFFFF",
+        "description": "#B0B0B0",
+        "closeButtonBackground": "#4A4A4E",
+        "closeButtonText": "#FFFFFF",
+        "stepNumberBackground": "#4A4A4E",
+        "stepNumberBorder": "#B0B0B0",
+        "stepNumberBackgroundCompleted": "#4A90E2",
+        "stepNumberBorderCompleted": "#4A90E2",
+        "stepNumberText": "#FFFFFF",
+        "stepDescription": "#FFFFFF",
+        "stepDescriptionCompleted": "#B0B0B0",
+        "stepBorder": "#4A4A4E",
+        "checkmarkCompleted": "#4A90E2",
+        "checkmarkIncomplete": "#4A4A4E",
+        "icon": "#4A90E2"
+      }
+    },
+    "AddNewTaskModal": {
+      "usedColors": {
+        "modalOverlay": "rgba(0, 0, 0, 0.8)",
+        "modalBackground": "#262629",
+        "modalBorder": "#4A4A4E",
+        "title": "#FFFFFF",
+        "inputLabel": "#FFFFFF",
+        "inputBackground": "#4A4A4E",
+        "inputBorder": "#4A4A4E",
+        "placeholder": "#B0B0B0",
+        "iconOptionBackground": "#4A4A4E",
+        "iconOptionSelected": "#4A90E2",
+        "iconSelected": "#FFFFFF",
+        "iconUnselected": "#4A90E2",
+        "addStepButtonBackground": "#4A4A4E",
+        "addStepButtonText": "#4A90E2",
+        "stepNumberBackground": "#4A4A4E",
+        "stepNumberText": "#FFFFFF",
+        "removeStepButton": "#FF6B35",
+        "removeStepButtonText": "#FFFFFF",
+        "createTaskButton": "#4A90E2",
+        "createTaskButtonText": "#FFFFFF",
+        "closeButtonBackground": "#4A4A4E",
+        "closeButtonText": "#FFFFFF"
       }
     }
+  },
+  "colorPalette": {
+    "description": "Complete color palette extracted from the Step-by-Step app",
+    "primary": {
+      "#1A1A1E": "Main background color",
+      "#262629": "Card/modal background color",
+      "#4A4A4E": "Secondary background, borders, inactive elements",
+      "#4A90E2": "Primary accent color (blue)",
+      "#00D4AA": "Success/progress color (green)",
+      "#FF6B35": "Danger/remove color (orange-red)"
+    },
+    "text": {
+      "#FFFFFF": "Primary text color",
+      "#F8F8F8": "Secondary text color (slightly off-white)",
+      "#B0B0B0": "Tertiary text color (gray)"
+    },
+    "effects": {
+      "rgba(0, 0, 0, 0.8)": "Modal overlay",
+      "rgba(0, 0, 0, 0.25)": "Shadow color with opacity",
+      "rgba(0, 0, 0, 0.3)": "Darker shadow color with opacity"
+    }
+  },
+  "designSystem": {
+    "colorUsageGuidelines": {
+      "background": {
+        "primary": "Use #1A1A1E for main app background",
+        "secondary": "Use #262629 for cards, modals, elevated surfaces",
+        "tertiary": "Use #4A4A4E for input fields, inactive buttons, borders"
+      },
+      "text": {
+        "primary": "Use #FFFFFF for main headings and important text",
+        "secondary": "Use #F8F8F8 for body text and descriptions",
+        "tertiary": "Use #B0B0B0 for secondary info, placeholders, subtle text"
+      },
+      "accent": {
+        "primary": "Use #4A90E2 for primary actions, icons, highlights",
+        "success": "Use #00D4AA for progress indicators, success states",
+        "danger": "Use #FF6B35 for destructive actions, warnings"
+      }
+    },
+    "componentPatterns": {
+      "modals": {
+        "overlay": "Always use rgba(0, 0, 0, 0.8) for modal overlays",
+        "background": "Use #262629 for modal content background",
+        "borders": "Use #4A4A4E for modal borders and internal dividers"
+      },
+      "buttons": {
+        "primary": "Background #4A90E2, text #FFFFFF",
+        "secondary": "Background #4A4A4E, text #4A90E2 or #FFFFFF",
+        "danger": "Background #FF6B35, text #FFFFFF"
+      },
+      "progress": {
+        "background": "#4A4A4E",
+        "fill": "#00D4AA"
+      }
+    }
+  },
+  "futureThemeSupport": {
+    "note": "This structure allows for easy theme switching by adding new theme objects (light, high-contrast, etc.) with the same color token structure",
+    "implementation": "Components should reference colors via theme tokens rather than hardcoded hex values",
+    "example": "Instead of backgroundColor: '#1A1A1E', use backgroundColor: theme.colors.background.primary"
   }
 }
