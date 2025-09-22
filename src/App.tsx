@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,8 +12,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import TaskCard from "./components/TaskCard";
 import InProgressTaskModal from "./components/InProgressTaskModal";
 import AddNewTaskModal from "./components/AddNewTaskModal";
+import AddAllToLocalStorageButton from "./development/addAllToLocalStorageButton";
+import RemoveAllFromLocalStorageButton from "./development/removeAllFromLocalStorageButton";
 
 import { dummyTasks, Task, TaskStep } from "./temporary/dummydata";
+
+import { getTasks } from "./services/taskStorage";
 
 // Icon handling moved to individual components
 
@@ -21,7 +25,7 @@ export default function App() {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [newTaskModalVisible, setNewTaskModalVisible] = useState(false);
-  const [tasks, setTasks] = useState(dummyTasks);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState({
     title: "",
     description: "",
@@ -29,6 +33,17 @@ export default function App() {
     steps: [""],
   });
 
+  // Load tasks when component mounts
+  useEffect(() => {
+    const loadTasks = async () => {
+      const initialTasks = await getTasks();
+      setTasks(initialTasks);
+    };
+
+    loadTasks();
+  }, []);
+
+  //functions for the modal
   const openTaskModal = (task: Task) => {
     setSelectedTask(task);
     setModalVisible(true);
@@ -89,10 +104,14 @@ export default function App() {
       <View style={styles.header}>
         <View style={styles.headerContent}>
           <View style={styles.headerTextContainer}>
-            <Text style={styles.headerTitle}>Step-By-Step</Text>
+            {/* <Text style={styles.headerTitle}>Step-By-Step</Text>
             <Text style={styles.headerSubtitle}>
               Break it down, get it done
-            </Text>
+            </Text> */}
+            <View style={styles.developmentButtonsContainer}>
+              <AddAllToLocalStorageButton />
+              <RemoveAllFromLocalStorageButton />
+            </View>
           </View>
           <TouchableOpacity
             style={styles.addButton}
@@ -188,5 +207,9 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontWeight: "300",
     lineHeight: 24,
+  },
+  developmentButtonsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
