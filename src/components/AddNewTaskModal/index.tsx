@@ -17,8 +17,24 @@ import Steps from "./Steps/index";
 interface props {
   visible: boolean;
   onClose: () => void;
-  onCreateTask: () => void;
+  onCreateTask: (newTask: Task) => void;
 }
+
+const initialTask: Task = {
+  id: 1,
+  title: "",
+  description: "",
+  icon: "Zap",
+  steps: [
+    {
+      id: 1,
+      description: "",
+      completed: false,
+    },
+  ],
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
 
 export default function AddNewTaskModal({
   visible,
@@ -27,21 +43,7 @@ export default function AddNewTaskModal({
 }: props) {
   console.log("AddNewTaskModal rendered");
 
-  const [newTask, setNewTask] = useState<Task>({
-    title: "",
-    description: "",
-    icon: "Zap",
-    steps: [
-      {
-        id: Date.now(),
-        description: "",
-        completed: false,
-      },
-    ],
-    id: 0,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  });
+  const [newTask, setNewTask] = useState<Task>(initialTask);
 
   console.log("newTask state: ", JSON.stringify(newTask));
 
@@ -94,7 +96,11 @@ export default function AddNewTaskModal({
             {/* Create Button */}
             <TouchableOpacity
               style={styles.createTaskButton}
-              onPress={onCreateTask}
+              onPress={() => {
+                onCreateTask(newTask);
+                onClose();
+                setNewTask(initialTask);
+              }}
             >
               <Text style={styles.createTaskButtonText}>Create Task</Text>
             </TouchableOpacity>

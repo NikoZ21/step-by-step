@@ -15,9 +15,9 @@ import AddNewTaskModal from "./components/AddNewTaskModal/index";
 import AddAllToLocalStorageButton from "./development/addAllToLocalStorageButton";
 import RemoveAllFromLocalStorageButton from "./development/removeAllFromLocalStorageButton";
 
-import { dummyTasks, Task, TaskStep } from "./temporary/dummydata";
+import { Task } from "./models/task";
 
-import { getTasks } from "./services/taskStorage";
+import { getTasks, addTask } from "./services/taskStorage";
 
 import { Dimensions, PixelRatio } from "react-native";
 
@@ -28,16 +28,6 @@ export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
   const [newTaskModalVisible, setNewTaskModalVisible] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [newTask, setNewTask] = useState({
-    title: "",
-    description: "",
-    icon: "Zap",
-    steps: [""],
-  });
-
-  const { width, height } = Dimensions.get("window");
-  const pixelRatio = PixelRatio.get();
-  console.log(width, height, pixelRatio);
 
   // Load tasks when component mounts
   useEffect(() => {
@@ -60,15 +50,6 @@ export default function App() {
     setSelectedTask(null);
   };
 
-  const openNewTaskModal = () => {
-    setNewTaskModalVisible(true);
-  };
-
-  const closeNewTaskModal = () => {
-    setNewTaskModalVisible(false);
-    setNewTask({ title: "", description: "", icon: "Zap", steps: [""] });
-  };
-
   const toggleStep = (taskId: number, stepId: number) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
@@ -86,10 +67,12 @@ export default function App() {
     );
   };
 
-  const handleCreateTask = () => {
+  const handleCreateTask = async (newTask: Task) => {
     // TODO: Implement task creation logic
     console.log("Creating task:", newTask);
-    closeNewTaskModal();
+    await addTask(newTask);
+
+    setTasks([...tasks, newTask]);
   };
 
   const renderTaskCard = ({ item }: { item: Task }) => (
@@ -118,7 +101,9 @@ export default function App() {
           <TouchableOpacity
             style={styles.addButton}
             activeOpacity={0.7}
-            onPress={openNewTaskModal}
+            onPress={() => {
+              setNewTaskModalVisible(true);
+            }}
           >
             <Text style={styles.addButtonText}>+</Text>
           </TouchableOpacity>
@@ -145,7 +130,9 @@ export default function App() {
       {/* New Task Modal */}
       <AddNewTaskModal
         visible={newTaskModalVisible}
-        onClose={closeNewTaskModal}
+        onClose={() => {
+          setNewTaskModalVisible(false);
+        }}
         onCreateTask={handleCreateTask}
       />
     </SafeAreaView>

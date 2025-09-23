@@ -1,7 +1,8 @@
-import { TouchableOpacity, TextInput } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { View, Text } from "react-native";
-import { Task, TaskStep } from "../../../models/task";
 import { StyleSheet } from "react-native";
+
+import { Task, TaskStep } from "../../../models/task";
 import Step from "./Step";
 
 export default function Steps({
@@ -20,7 +21,7 @@ export default function Steps({
           style={styles.addStepButton}
           onPress={() => {
             const newStep: TaskStep = {
-              id: Date.now(), // Simple ID generation
+              id: newTask.steps.length + 1, // Simple ID generation
               description: "",
               completed: false,
             };
@@ -49,36 +50,6 @@ export default function Steps({
             updateNewTask({ steps: newSteps });
           }}
         />
-        // <View key={step.id} style={styles.stepInputContainer}>
-        //   <View style={styles.stepInputNumber}>
-        //     <Text style={styles.stepInputNumberText}>{index + 1}</Text>
-        //   </View>
-        //   <View style={styles.stepInputField}>
-        //     <TextInput
-        //       style={styles.stepInput}
-        //       placeholder={`Step ${index + 1} description...`}
-        //       placeholderTextColor="#B0B0B0"
-        //       value={step.description}
-        //       onChangeText={(text) => {
-        //         const updatedSteps = newTask.steps.map((s, i) =>
-        //           i === index ? { ...s, description: text } : s
-        //         );
-        //         updateNewTask({ steps: updatedSteps });
-        //       }}
-        //     />
-        //   </View>
-        //   {newTask.steps.length > 1 && (
-        //     <TouchableOpacity
-        //       style={styles.removeStepButton}
-        //       onPress={() => {
-        //         const newSteps = newTask.steps.filter((_, i) => i !== index);
-        //         updateNewTask({ steps: newSteps });
-        //       }}
-        //     >
-        //       <Text style={styles.removeStepButtonText}>×</Text>
-        //     </TouchableOpacity>
-        //   )}
-        // </View>
       ))}
     </View>
   );

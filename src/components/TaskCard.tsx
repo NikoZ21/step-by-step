@@ -1,25 +1,18 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-import { Task, TaskStep } from "../temporary/dummydata";
+import { TaskStep } from "../models/task";
+import { Task } from "../models/task";
 
 import { scaleHeight, scaleWidth } from "../utils/scaling";
 
+import { emojiMap } from "../data/icons";
 // Temporary fallback to emojis while we debug the icon library
 const getTaskIcon = (
   iconName: string,
   size: number = 24,
   color: string = "#4A90E2"
 ) => {
-  const emojiMap: { [key: string]: string } = {
-    Zap: "⚡",
-    Code: "💻",
-    ChefHat: "👨‍🍳",
-    Target: "🎯",
-    Sparkles: "✨",
-    BookOpen: "📚",
-  };
-
   return (
     <Text style={{ fontSize: size, color: "#4A90E2" }}>
       {emojiMap[iconName] || "⚡"}
