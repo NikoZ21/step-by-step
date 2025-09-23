@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-interface CustomInputProps {
+interface Props {
   label: string;
   value: string;
   placeholder: string;
@@ -17,7 +17,7 @@ export default function CustomInput({
   onChangeText,
   multiline = false,
   numberOfLines = 1,
-}: CustomInputProps) {
+}: Props) {
   return (
     <View style={styles.inputSection}>
       <Text style={styles.inputLabel}>{label}</Text>
@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
   inputContainer: {
     backgroundColor: "#4A4A4E",
     borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
     borderWidth: 1,
     borderColor: "#4A4A4E",
   },

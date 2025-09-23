@@ -11,6 +11,7 @@ import {
 import { Task, TaskStep } from "../../models/task";
 
 import IconSelector from "./IconSelector";
+import CustomInput from "./CustomInput";
 
 interface props {
   visible: boolean;
@@ -58,23 +59,21 @@ export default function AddNewTaskModal({
             showsVerticalScrollIndicator={false}
           >
             {/* Task Title Input */}
-            <View style={styles.inputSection}>
-              <Text style={styles.inputLabel}>Task Name</Text>
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputPlaceholder}>
-                  {newTask.title || "Enter task name..."}
-                </Text>
-              </View>
-            </View>
+            <CustomInput
+              label="Task Name"
+              value={newTask.title}
+              placeholder="Enter task name..."
+              onChangeText={(text) => updateNewTask({ title: text })}
+            />
             {/* Task Description Input */}
-            <View style={styles.inputSection}>
-              <Text style={styles.inputLabel}>Description</Text>
-              <View style={styles.inputContainer}>
-                <Text style={styles.inputPlaceholder}>
-                  {newTask.description || "Enter description..."}
-                </Text>
-              </View>
-            </View>
+            <CustomInput
+              label="Description"
+              value={newTask.description}
+              placeholder="Enter description..."
+              onChangeText={(text) => updateNewTask({ description: text })}
+              multiline={true}
+              numberOfLines={1}
+            />
             {/* Icon Selection */}
             <IconSelector newTask={newTask} updateNewTask={updateNewTask} />
             {/* Steps Section
