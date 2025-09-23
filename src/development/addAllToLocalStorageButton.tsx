@@ -55,14 +55,7 @@ const styles = StyleSheet.create({
     margin: 5,
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    elevation: 1,
   },
   buttonText: {
     fontSize: 20,

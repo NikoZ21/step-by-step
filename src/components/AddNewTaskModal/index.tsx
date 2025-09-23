@@ -24,6 +24,8 @@ export default function AddNewTaskModal({
   onClose,
   onCreateTask,
 }: props) {
+  console.log("AddNewTaskModal rendered");
+
   const [newTask, setNewTask] = useState<Task>({
     title: "",
     description: "",
@@ -285,14 +287,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 24,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    elevation: 1,
   },
   createTaskButtonText: {
     fontSize: 18,

@@ -19,9 +19,11 @@ import { dummyTasks, Task, TaskStep } from "./temporary/dummydata";
 
 import { getTasks } from "./services/taskStorage";
 
-// Icon handling moved to individual components
+import { Dimensions, PixelRatio } from "react-native";
 
 export default function App() {
+  console.log("App rendered");
+
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [newTaskModalVisible, setNewTaskModalVisible] = useState(false);
@@ -32,6 +34,10 @@ export default function App() {
     icon: "Zap",
     steps: [""],
   });
+
+  const { width, height } = Dimensions.get("window");
+  const pixelRatio = PixelRatio.get();
+  console.log(width, height, pixelRatio);
 
   // Load tasks when component mounts
   useEffect(() => {
@@ -187,14 +193,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#4A90E2",
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    elevation: 1,
   },
   addButtonText: {
     fontSize: 24,

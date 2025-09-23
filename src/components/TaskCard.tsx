@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 import { Task, TaskStep } from "../temporary/dummydata";
 
+import { scaleHeight, scaleWidth } from "../utils/scaling";
+
 // Temporary fallback to emojis while we debug the icon library
 const getTaskIcon = (
   iconName: string,
@@ -72,17 +74,11 @@ export default function TaskCard({ item, onPress }: TaskCardProps) {
 const styles = StyleSheet.create({
   taskCard: {
     backgroundColor: "#262629",
+    width: "100%",
     padding: 20,
     marginBottom: 16,
     borderRadius: 16,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 8,
+    elevation: scaleWidth(1),
   },
   taskHeader: {
     flexDirection: "row",

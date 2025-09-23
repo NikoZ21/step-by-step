@@ -1,7 +1,8 @@
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 import { Text } from "react-native";
-import { emojiMap } from "../../data/icons";
 import { Task } from "../../models/task";
+
+import { emojiMap } from "../../data/icons";
 
 const getTaskIcon = (
   iconName: string,
@@ -26,26 +27,24 @@ export default function IconSelector({
     <View style={styles.inputSection}>
       <Text style={styles.inputLabel}>Choose Icon</Text>
       <View style={styles.iconSelectionContainer}>
-        {["Zap", "Code", "ChefHat", "Target", "Sparkles", "BookOpen"].map(
-          (iconName) => (
-            <TouchableOpacity
-              key={iconName}
-              style={[
-                styles.iconOption,
-                newTask.icon === iconName && styles.iconOptionSelected,
-              ]}
-              onPress={() => updateNewTask({ icon: iconName })}
-            >
-              <View style={styles.iconOptionContainer}>
-                {getTaskIcon(
-                  iconName,
-                  20,
-                  newTask.icon === iconName ? "#FFFFFF" : "#4A90E2"
-                )}
-              </View>
-            </TouchableOpacity>
-          )
-        )}
+        {Object.keys(emojiMap).map((iconName) => (
+          <TouchableOpacity
+            key={iconName}
+            style={[
+              styles.iconOption,
+              newTask.icon === iconName && styles.iconOptionSelected,
+            ]}
+            onPress={() => updateNewTask({ icon: iconName })}
+          >
+            <View style={styles.iconOptionContainer}>
+              {getTaskIcon(
+                iconName,
+                20,
+                newTask.icon === iconName ? "#FFFFFF" : "#4A90E2"
+              )}
+            </View>
+          </TouchableOpacity>
+        ))}
       </View>
     </View>
   );

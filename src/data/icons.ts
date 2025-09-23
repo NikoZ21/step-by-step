@@ -5,4 +5,8 @@ export const emojiMap: { [key: string]: string } = {
   Target: "🎯",
   Sparkles: "✨",
   BookOpen: "📚",
+  Dumbbell: "🏋️‍♂️",
+  Heart: "❤️",
+  Home: "🏠",
+  Calendar: "📅",
 };
