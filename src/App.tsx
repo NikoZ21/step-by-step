@@ -189,17 +189,17 @@ const styles = StyleSheet.create({
   addButton: {
     width: 40,
     height: 40,
-    borderRadius: 20,
+    borderRadius: 8,
     backgroundColor: "#4A90E2",
     justifyContent: "center",
     alignItems: "center",
     elevation: 1,
   },
   addButtonText: {
-    fontSize: 24,
+    fontSize: 32,
     color: "#FFFFFF",
     fontWeight: "300",
-    lineHeight: 24,
+    lineHeight: 32,
   },
   developmentButtonsContainer: {
     flexDirection: "row",

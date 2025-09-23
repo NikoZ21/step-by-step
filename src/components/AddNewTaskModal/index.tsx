@@ -12,7 +12,7 @@ import { Task, TaskStep } from "../../models/task";
 
 import IconSelector from "./IconSelector";
 import CustomInput from "./CustomInput";
-import Steps from "./Steps";
+import Steps from "./Steps/index";
 
 interface props {
   visible: boolean;
@@ -139,12 +139,14 @@ const styles = StyleSheet.create({
   closeButton: {
     width: 32,
     height: 32,
+    backgroundColor: "#FF0000",
+    borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
   },
   closeButtonText: {
     fontSize: 24,
-    color: "#FF0000",
+    color: "#FFFFFF",
     fontWeight: "600",
   },
   newTaskContainer: {
