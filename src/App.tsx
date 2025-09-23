@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import TaskCard from "./components/TaskCard";
 import InProgressTaskModal from "./components/InProgressTaskModal";
-import AddNewTaskModal from "./components/AddNewTaskModal";
+import AddNewTaskModal from "./components/AddNewTaskModal/index";
 import AddAllToLocalStorageButton from "./development/addAllToLocalStorageButton";
 import RemoveAllFromLocalStorageButton from "./development/removeAllFromLocalStorageButton";
 
@@ -80,10 +80,6 @@ export default function App() {
     );
   };
 
-  const handleUpdateNewTask = (updatedTask: typeof newTask) => {
-    setNewTask(updatedTask);
-  };
-
   const handleCreateTask = () => {
     // TODO: Implement task creation logic
     console.log("Creating task:", newTask);
@@ -143,9 +139,7 @@ export default function App() {
       {/* New Task Modal */}
       <AddNewTaskModal
         visible={newTaskModalVisible}
-        newTask={newTask}
         onClose={closeNewTaskModal}
-        onUpdateTask={handleUpdateNewTask}
         onCreateTask={handleCreateTask}
       />
     </SafeAreaView>
