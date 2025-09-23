@@ -1,0 +1,17 @@
+---
+alwaysApply: true
+---
+
+# General Coding Rules
+
+## Language Standards
+
+- Always use TypeScript
+
+## Component Props Interface Naming
+
+- Every time we create a component, their props interface should be named "Props"
+
+## Component Structure
+
+- When creating a "foldered component", create a folder inside the components folder and put an index.tsx file in that folder. The folder name will be specified in the chat when needed.
