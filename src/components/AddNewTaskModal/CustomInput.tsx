@@ -47,16 +47,15 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   inputContainer: {
-    backgroundColor: "#4A4A4E",
-    borderRadius: 12,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-    borderWidth: 1,
-    borderColor: "#4A4A4E",
+    paddingHorizontal: 4,
+    paddingVertical: 8,
   },
   textInput: {
     fontSize: 16,
     color: "#FFFFFF",
-    minHeight: 20,
+    minHeight: 40,
+    borderBottomWidth: 1,
+    borderBottomColor: "#4A4A4E",
+    paddingVertical: 8,
   },
 });

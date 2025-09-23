@@ -68,16 +68,17 @@ const styles = StyleSheet.create({
   iconOption: {
     width: 48,
     height: 48,
-    borderRadius: 24,
-    backgroundColor: "#4A4A4E",
+    borderRadius: 8,
+    backgroundColor: "transparent",
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: "#4A4A4E",
   },
   iconOptionSelected: {
-    backgroundColor: "#4A90E2",
+    backgroundColor: "transparent",
     borderColor: "#4A90E2",
+    borderWidth: 2,
   },
   iconOptionContainer: {
     justifyContent: "center",
