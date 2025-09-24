@@ -3,18 +3,7 @@ import { Text } from "react-native";
 import { Task } from "../../models/task";
 
 import { emojiMap } from "../../data/icons";
-
-const getTaskIcon = (
-  iconName: string,
-  size: number = 24,
-  color: string = "#4A90E2"
-) => {
-  return (
-    <Text style={{ fontSize: size, color: "#4A90E2" }}>
-      {emojiMap[iconName] || "⚡"}
-    </Text>
-  );
-};
+import TaskIcon from "../Shared/TaskIcon";
 
 export default function IconSelector({
   newTask,
@@ -37,11 +26,10 @@ export default function IconSelector({
             onPress={() => updateNewTask({ icon: iconName })}
           >
             <View style={styles.iconOptionContainer}>
-              {getTaskIcon(
-                iconName,
-                20,
-                newTask.icon === iconName ? "#FFFFFF" : "#4A90E2"
-              )}
+              <TaskIcon
+                iconName={iconName}
+                color={newTask.icon === iconName ? "#FFFFFF" : "#4A90E2"}
+              />
             </View>
           </TouchableOpacity>
         ))}

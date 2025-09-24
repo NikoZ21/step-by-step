@@ -1,4 +1,6 @@
 1. Delete Task Ui and functionality
 2. Steps completion functionality
 3. Task completion look and maybe adding tab navigation for complete and incomplete tasks
-4. Refactor TaskIcon.tsx
+4. Refactor TaskIcon.tsx ✅
+5. Install nanoid ✅
+6. Use nanoid instead of DateTime

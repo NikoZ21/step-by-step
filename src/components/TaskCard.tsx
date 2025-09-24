@@ -6,19 +6,7 @@ import { Task } from "../models/task";
 
 import { scaleHeight, scaleWidth } from "../utils/scaling";
 
-import { emojiMap } from "../data/icons";
-// Temporary fallback to emojis while we debug the icon library
-const getTaskIcon = (
-  iconName: string,
-  size: number = 24,
-  color: string = "#4A90E2"
-) => {
-  return (
-    <Text style={{ fontSize: size, color: "#4A90E2" }}>
-      {emojiMap[iconName] || "⚡"}
-    </Text>
-  );
-};
+import TaskIcon from "./Shared/TaskIcon";
 
 interface TaskCardProps {
   item: Task;
@@ -43,7 +31,7 @@ export default function TaskCard({ item, onPress }: TaskCardProps) {
       <View style={styles.taskHeader}>
         <View style={styles.taskTitleRow}>
           <View style={styles.taskIconContainer}>
-            {getTaskIcon(item.icon, 24, "#4A90E2")}
+            <TaskIcon iconName={item.icon} color="#4A90E2" />
           </View>
           <Text style={styles.taskTitle}>{item.title}</Text>
         </View>

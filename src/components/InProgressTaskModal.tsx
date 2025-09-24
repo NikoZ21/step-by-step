@@ -8,28 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { Task, TaskStep } from "../temporary/dummydata";
-
-// Temporary fallback to emojis while we debug the icon library
-const getTaskIcon = (
-  iconName: string,
-  size: number = 24,
-  color: string = "#4A90E2"
-) => {
-  const emojiMap: { [key: string]: string } = {
-    Zap: "⚡",
-    Code: "💻",
-    ChefHat: "👨‍🍳",
-    Target: "🎯",
-    Sparkles: "✨",
-    BookOpen: "📚",
-  };
-
-  return (
-    <Text style={{ fontSize: size, color: "#4A90E2" }}>
-      {emojiMap[iconName] || "⚡"}
-    </Text>
-  );
-};
+import TaskIcon from "./Shared/TaskIcon";
 
 interface TaskModalProps {
   visible: boolean;
@@ -107,7 +86,7 @@ export default function InProgressTaskModal({
           <View style={styles.modalHeader}>
             <View style={styles.modalTitleRow}>
               <View style={styles.modalIconContainer}>
-                {getTaskIcon(task.icon, 28, "#4A90E2")}
+                <TaskIcon iconName={task.icon} color="#4A90E2" />
               </View>
               <Text style={styles.modalTitle}>{task.title}</Text>
             </View>
