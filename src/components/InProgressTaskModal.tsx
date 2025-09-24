@@ -7,14 +7,14 @@ import {
   Modal,
   ScrollView,
 } from "react-native";
-import { Task, TaskStep } from "../temporary/dummydata";
+import { Task, TaskStep } from "../models/task";
 import TaskIcon from "./Shared/TaskIcon";
 
 interface TaskModalProps {
   visible: boolean;
   task: Task | null;
   onClose: () => void;
-  onToggleStep: (taskId: number, stepId: number) => void;
+  onToggleStep: (taskId: string, stepId: number) => void;
 }
 
 const getCompletedSteps = (steps: TaskStep[]) => {
@@ -29,7 +29,7 @@ export default function InProgressTaskModal({
 }: TaskModalProps) {
   if (!task) return null;
 
-  const renderStepItem = (step: TaskStep, taskId: number) => (
+  const renderStepItem = (step: TaskStep, taskId: string) => (
     <TouchableOpacity
       key={step.id}
       style={[styles.stepItem, step.completed && styles.stepItemCompleted]}

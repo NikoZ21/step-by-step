@@ -19,8 +19,6 @@ import { Task } from "./models/task";
 
 import { getTasks, addTask } from "./services/taskStorage";
 
-import { Dimensions, PixelRatio } from "react-native";
-
 export default function App() {
   console.log("App rendered");
 
@@ -50,7 +48,7 @@ export default function App() {
     setSelectedTask(null);
   };
 
-  const toggleStep = (taskId: number, stepId: number) => {
+  const toggleStep = (taskId: string, stepId: number) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === taskId
@@ -68,11 +66,8 @@ export default function App() {
   };
 
   const handleCreateTask = async (newTask: Task) => {
-    // TODO: Implement task creation logic
-    console.log("Creating task:", newTask);
-    await addTask(newTask);
-
     setTasks([...tasks, newTask]);
+    await addTask(newTask);
   };
 
   const renderTaskCard = ({ item }: { item: Task }) => (

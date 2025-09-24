@@ -8,7 +8,10 @@ import {
   ScrollView,
 } from "react-native";
 
-import { Task, TaskStep } from "../../models/task";
+import { customAlphabet } from "nanoid/non-secure";
+const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz", 10);
+
+import { Task } from "../../models/task";
 
 import IconSelector from "./IconSelector";
 import CustomInput from "./CustomInput";
@@ -21,7 +24,7 @@ interface props {
 }
 
 const initialTask: Task = {
-  id: 1,
+  id: "",
   title: "",
   description: "",
   icon: "Zap",
@@ -44,8 +47,6 @@ export default function AddNewTaskModal({
   console.log("AddNewTaskModal rendered");
 
   const [newTask, setNewTask] = useState<Task>(initialTask);
-
-  console.log("newTask state: ", JSON.stringify(newTask));
 
   const updateNewTask = (updates: Partial<Task>) => {
     setNewTask({ ...newTask, ...updates });
@@ -97,9 +98,19 @@ export default function AddNewTaskModal({
             <TouchableOpacity
               style={styles.createTaskButton}
               onPress={() => {
-                onCreateTask(newTask);
+                const taskWithId = {
+                  ...newTask,
+                  id: nanoid(),
+                  createdAt: new Date(),
+                  updatedAt: new Date(),
+                };
+                onCreateTask(taskWithId);
                 onClose();
                 setNewTask(initialTask);
+                console.log(
+                  " =>>>>>>>> newTask created: ",
+                  JSON.stringify(taskWithId)
+                );
               }}
             >
               <Text style={styles.createTaskButtonText}>Create Task</Text>
