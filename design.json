@@ -16,7 +16,9 @@
         "accent": {
           "primary": "#4A90E2",
           "success": "#00D4AA",
-          "danger": "#FF6B35"
+          "danger": "#FF6B35",
+          "edit": "#FF8C42",
+          "delete": "#E74C3C"
         },
         "border": {
           "primary": "#4A4A4E",
@@ -114,7 +116,11 @@
         "progressBackground": "#4A4A4E",
         "progressFill": "#00D4AA",
         "progressText": "#B0B0B0",
-        "icon": "#4A90E2"
+        "icon": "#4A90E2",
+        "swipeEditBackground": "#FF8C42",
+        "swipeEditIcon": "#FFFFFF",
+        "swipeDeleteBackground": "#E74C3C",
+        "swipeDeleteIcon": "#FFFFFF"
       }
     },
     "InProgressTaskModal": {
@@ -202,7 +208,9 @@
       "accent": {
         "primary": "Use #4A90E2 for primary actions, icons, highlights",
         "success": "Use #00D4AA for progress indicators, success states",
-        "danger": "Use #FF6B35 for destructive actions, warnings"
+        "danger": "Use #FF6B35 for destructive actions, warnings",
+        "edit": "Use #FF8C42 for edit actions, secondary orange background",
+        "delete": "Use #E74C3C for delete actions, destructive red background"
       }
     },
     "componentPatterns": {

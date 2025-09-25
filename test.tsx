@@ -69,5 +69,6 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "papayawhip",
     alignItems: "center",
+    marginBottom: 16,
   },
 });

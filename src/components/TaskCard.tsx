@@ -7,7 +7,12 @@ import { Task } from "../models/task";
 import { scaleHeight, scaleWidth } from "../utils/scaling";
 
 import TaskIcon from "./Shared/TaskIcon";
-import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import Reanimated, {
+  SharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+import SwipeAction from "./SwipeAction";
 
 interface TaskCardProps {
   item: Task;
@@ -18,13 +23,47 @@ const getCompletedSteps = (steps: TaskStep[]) => {
   return steps.filter((step) => step.completed).length;
 };
 
+function LeftAction(prog: SharedValue<number>, drag: SharedValue<number>) {
+  return (
+    <SwipeAction
+      prog={prog}
+      drag={drag}
+      icon="✏️"
+      text="Edit"
+      actionStyle={styles.leftAction}
+    />
+  );
+}
+
+function RightAction(prog: SharedValue<number>, drag: SharedValue<number>) {
+  return (
+    <SwipeAction
+      prog={prog}
+      drag={drag}
+      icon="✏️"
+      text="Edit"
+      direction={-1}
+      actionStyle={styles.rightAction}
+    />
+  );
+}
+
 export default function TaskCard({ item, onPress }: TaskCardProps) {
   const completedSteps = getCompletedSteps(item.steps);
   const totalSteps = item.steps.length;
   const progressPercentage = (completedSteps / totalSteps) * 100;
 
   return (
-    <Swipeable>
+    <ReanimatedSwipeable
+      friction={2}
+      enableTrackpadTwoFingerGesture
+      rightThreshold={300}
+      overshootLeft={false}
+      overshootRight={false}
+      renderRightActions={RightAction}
+      renderLeftActions={LeftAction}
+      containerStyle={styles.swipeableContainer}
+    >
       <TouchableOpacity
         style={styles.taskCard}
         onPress={() => onPress(item)}
@@ -51,11 +90,15 @@ export default function TaskCard({ item, onPress }: TaskCardProps) {
           {Math.round(progressPercentage)}% complete
         </Text>
       </TouchableOpacity>
-    </Swipeable>
+    </ReanimatedSwipeable>
   );
 }
 
 const styles = StyleSheet.create({
+  swipeableContainer: {
+    flex: 1,
+    backgroundColor: "red",
+  },
   taskCard: {
     backgroundColor: "#262629",
     width: "100%",
@@ -116,5 +159,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#B0B0B0",
     textAlign: "right",
+  },
+  rightAction: {
+    backgroundColor: "#E74C3C",
+    alignItems: "flex-end",
+  },
+  leftAction: {
+    backgroundColor: "#FF8C42",
+    alignItems: "flex-start",
   },
 });
