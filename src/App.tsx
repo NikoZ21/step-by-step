@@ -11,13 +11,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import TaskCard from "./components/TaskCard";
 import InProgressTaskModal from "./components/InProgressTaskModal";
-import AddNewTaskModal from "./components/AddNewTaskModal/index";
+import AddNewTaskModal from "./components/TaskFormModal/index";
 import AddAllToLocalStorageButton from "./development/addAllToLocalStorageButton";
 import RemoveAllFromLocalStorageButton from "./development/removeAllFromLocalStorageButton";
 
 import { Task } from "./models/task";
 
 import { getTasks, addTask } from "./services/taskStorage";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+import Test from "../test";
 
 export default function App() {
   console.log("App rendered");
@@ -77,60 +80,63 @@ export default function App() {
   // Step rendering logic moved to TaskModal component
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="light" />
+    <Test />
+    // <GestureHandlerRootView style={{ flex: 1 }}>
+    //   <SafeAreaView style={styles.container}>
+    //     <StatusBar style="light" />
 
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.headerContent}>
-          <View style={styles.headerTextContainer}>
-            {/* <Text style={styles.headerTitle}>Step-By-Step</Text>
-            <Text style={styles.headerSubtitle}>
-              Break it down, get it done
-            </Text> */}
-            <View style={styles.developmentButtonsContainer}>
-              <AddAllToLocalStorageButton />
-              <RemoveAllFromLocalStorageButton />
-            </View>
-          </View>
-          <TouchableOpacity
-            style={styles.addButton}
-            activeOpacity={0.7}
-            onPress={() => {
-              setNewTaskModalVisible(true);
-            }}
-          >
-            <Text style={styles.addButtonText}>+</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+    //     {/* Header */}
+    //     <View style={styles.header}>
+    //       <View style={styles.headerContent}>
+    //         <View style={styles.headerTextContainer}>
+    //           {/* <Text style={styles.headerTitle}>Step-By-Step</Text>
+    //         <Text style={styles.headerSubtitle}>
+    //           Break it down, get it done
+    //         </Text> */}
+    //           <View style={styles.developmentButtonsContainer}>
+    //             <AddAllToLocalStorageButton />
+    //             <RemoveAllFromLocalStorageButton />
+    //           </View>
+    //         </View>
+    //         <TouchableOpacity
+    //           style={styles.addButton}
+    //           activeOpacity={0.7}
+    //           onPress={() => {
+    //             setNewTaskModalVisible(true);
+    //           }}
+    //         >
+    //           <Text style={styles.addButtonText}>+</Text>
+    //         </TouchableOpacity>
+    //       </View>
+    //     </View>
 
-      {/* Task List */}
-      <FlatList
-        data={tasks}
-        renderItem={renderTaskCard}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.taskList}
-        showsVerticalScrollIndicator={false}
-      />
+    //     {/* Task List */}
+    //     <FlatList
+    //       data={tasks}
+    //       renderItem={renderTaskCard}
+    //       keyExtractor={(item) => item.id.toString()}
+    //       contentContainerStyle={styles.taskList}
+    //       showsVerticalScrollIndicator={false}
+    //     />
 
-      {/* Task Detail Modal */}
-      <InProgressTaskModal
-        visible={modalVisible}
-        task={selectedTask}
-        onClose={closeModal}
-        onToggleStep={toggleStep}
-      />
+    //     {/* Task Detail Modal */}
+    //     <InProgressTaskModal
+    //       visible={modalVisible}
+    //       task={selectedTask}
+    //       onClose={closeModal}
+    //       onToggleStep={toggleStep}
+    //     />
 
-      {/* New Task Modal */}
-      <AddNewTaskModal
-        visible={newTaskModalVisible}
-        onClose={() => {
-          setNewTaskModalVisible(false);
-        }}
-        onCreateTask={handleCreateTask}
-      />
-    </SafeAreaView>
+    //     {/* New Task Modal */}
+    //     <AddNewTaskModal
+    //       visible={newTaskModalVisible}
+    //       onClose={() => {
+    //         setNewTaskModalVisible(false);
+    //       }}
+    //       onCreateTask={handleCreateTask}
+    //     />
+    //   </SafeAreaView>
+    // </GestureHandlerRootView>
   );
 }
 

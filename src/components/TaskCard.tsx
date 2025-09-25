@@ -7,6 +7,7 @@ import { Task } from "../models/task";
 import { scaleHeight, scaleWidth } from "../utils/scaling";
 
 import TaskIcon from "./Shared/TaskIcon";
+import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 
 interface TaskCardProps {
   item: Task;
@@ -23,32 +24,34 @@ export default function TaskCard({ item, onPress }: TaskCardProps) {
   const progressPercentage = (completedSteps / totalSteps) * 100;
 
   return (
-    <TouchableOpacity
-      style={styles.taskCard}
-      onPress={() => onPress(item)}
-      activeOpacity={0.7}
-    >
-      <View style={styles.taskHeader}>
-        <View style={styles.taskTitleRow}>
-          <View style={styles.taskIconContainer}>
-            <TaskIcon iconName={item.icon} color="#4A90E2" />
+    <Swipeable>
+      <TouchableOpacity
+        style={styles.taskCard}
+        onPress={() => onPress(item)}
+        activeOpacity={0.7}
+      >
+        <View style={styles.taskHeader}>
+          <View style={styles.taskTitleRow}>
+            <View style={styles.taskIconContainer}>
+              <TaskIcon iconName={item.icon} color="#4A90E2" />
+            </View>
+            <Text style={styles.taskTitle}>{item.title}</Text>
           </View>
-          <Text style={styles.taskTitle}>{item.title}</Text>
+          <Text style={styles.stepCounter}>
+            {completedSteps}/{totalSteps}
+          </Text>
         </View>
-        <Text style={styles.stepCounter}>
-          {completedSteps}/{totalSteps}
+        <Text style={styles.taskDescription}>{item.description}</Text>
+        <View style={styles.progressBarContainer}>
+          <View
+            style={[styles.progressBar, { width: `${progressPercentage}%` }]}
+          />
+        </View>
+        <Text style={styles.progressText}>
+          {Math.round(progressPercentage)}% complete
         </Text>
-      </View>
-      <Text style={styles.taskDescription}>{item.description}</Text>
-      <View style={styles.progressBarContainer}>
-        <View
-          style={[styles.progressBar, { width: `${progressPercentage}%` }]}
-        />
-      </View>
-      <Text style={styles.progressText}>
-        {Math.round(progressPercentage)}% complete
-      </Text>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </Swipeable>
   );
 }
 

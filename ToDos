@@ -1,6 +1,8 @@
-1. Delete Task Ui and functionality
+1. Delete Task Ui and functionality using the swipable and hand gestures
 2. Steps completion functionality
 3. Task completion look and maybe adding tab navigation for complete and incomplete tasks
-4. Refactor TaskIcon.tsx ✅
-5. Install nanoid ✅
-6. Use nanoid instead of DateTime
+4. Further refactor addNewTaskModal.tsx so both adding and editing happens with one modal
+5. Refactor TaskIcon.tsx ✅
+6. Install nanoid ✅
+7. Use nanoid instead of DateTime ✅
+8. Build apk, trasnfers to my phone and start using app

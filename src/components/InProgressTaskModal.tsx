@@ -7,6 +7,8 @@ import {
   Modal,
   ScrollView,
 } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import { Task, TaskStep } from "../models/task";
 import TaskIcon from "./Shared/TaskIcon";
 
@@ -75,44 +77,46 @@ export default function InProgressTaskModal({
   );
 
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={visible}
-      onRequestClose={onClose}
-    >
-      <View style={styles.modalOverlay}>
-        <View style={styles.modalContent}>
-          <View style={styles.modalHeader}>
-            <View style={styles.modalTitleRow}>
-              <View style={styles.modalIconContainer}>
-                <TaskIcon iconName={task.icon} color="#4A90E2" />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={visible}
+        onRequestClose={onClose}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <View style={styles.modalTitleRow}>
+                <View style={styles.modalIconContainer}>
+                  <TaskIcon iconName={task.icon} color="#4A90E2" />
+                </View>
+                <Text style={styles.modalTitle}>{task.title}</Text>
               </View>
-              <Text style={styles.modalTitle}>{task.title}</Text>
+              <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+                <Text style={styles.closeButtonText}>×</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-              <Text style={styles.closeButtonText}>×</Text>
-            </TouchableOpacity>
+
+            <Text style={styles.modalDescription}>{task.description}</Text>
+
+            <View style={styles.stepsHeader}>
+              <Text style={styles.stepsTitle}>Steps</Text>
+              <Text style={styles.stepsCounter}>
+                {getCompletedSteps(task.steps)} of {task.steps.length} completed
+              </Text>
+            </View>
+
+            <ScrollView
+              style={styles.stepsContainer}
+              showsVerticalScrollIndicator={false}
+            >
+              {task.steps.map((step) => renderStepItem(step, task.id))}
+            </ScrollView>
           </View>
-
-          <Text style={styles.modalDescription}>{task.description}</Text>
-
-          <View style={styles.stepsHeader}>
-            <Text style={styles.stepsTitle}>Steps</Text>
-            <Text style={styles.stepsCounter}>
-              {getCompletedSteps(task.steps)} of {task.steps.length} completed
-            </Text>
-          </View>
-
-          <ScrollView
-            style={styles.stepsContainer}
-            showsVerticalScrollIndicator={false}
-          >
-            {task.steps.map((step) => renderStepItem(step, task.id))}
-          </ScrollView>
         </View>
-      </View>
-    </Modal>
+      </Modal>
+    </GestureHandlerRootView>
   );
 }
 
