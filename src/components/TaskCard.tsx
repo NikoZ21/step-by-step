@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 import { TaskStep } from "../models/task";
@@ -11,6 +11,7 @@ import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeabl
 import Reanimated, {
   SharedValue,
   useAnimatedStyle,
+  useSharedValue,
 } from "react-native-reanimated";
 import SwipeAction from "./SwipeAction";
 
@@ -23,73 +24,117 @@ const getCompletedSteps = (steps: TaskStep[]) => {
   return steps.filter((step) => step.completed).length;
 };
 
-function LeftAction(prog: SharedValue<number>, drag: SharedValue<number>) {
-  return (
-    <SwipeAction
-      prog={prog}
-      drag={drag}
-      icon="✏️"
-      text="Edit"
-      actionStyle={styles.leftAction}
-    />
-  );
-}
+// function LeftAction(prog: SharedValue<number>, drag: SharedValue<number>) {
+//   return (
+//     <SwipeAction
+//       prog={prog}
+//       drag={drag}
+//       icon="✏️"
+//       text="Edit"
+//       actionStyle={styles.leftAction}
+//     />
+//   );
+// }
 
-function RightAction(prog: SharedValue<number>, drag: SharedValue<number>) {
-  return (
-    <SwipeAction
-      prog={prog}
-      drag={drag}
-      icon="✏️"
-      text="Edit"
-      direction={-1}
-      actionStyle={styles.rightAction}
-    />
-  );
-}
+// function RightAction(prog: SharedValue<number>, drag: SharedValue<number>) {
+//   return (
+//     <SwipeAction
+//       prog={prog}
+//       drag={drag}
+//       icon="🗑️"
+//       text="Delete"
+//       direction={-1}
+//       actionStyle={styles.rightAction}
+//     />
+//   );
+// }
 
 export default function TaskCard({ item, onPress }: TaskCardProps) {
   const completedSteps = getCompletedSteps(item.steps);
   const totalSteps = item.steps.length;
   const progressPercentage = (completedSteps / totalSteps) * 100;
 
+  const sharedProg = useSharedValue(0);
+
+  const updateProgress = (progress: number) => {
+    "worklet";
+    sharedProg.value = progress;
+  };
+
+  const RightAction = (
+    prog: SharedValue<number>,
+    drag: SharedValue<number>
+  ) => {
+    return (
+      <SwipeAction
+        prog={prog}
+        drag={drag}
+        icon="✏️"
+        text="Edit"
+        direction={-1}
+        actionStyle={styles.rightAction}
+        onProgress={updateProgress}
+      />
+    );
+  };
+
+  const LeftAction = (prog: SharedValue<number>, drag: SharedValue<number>) => {
+    return (
+      <SwipeAction
+        prog={prog}
+        drag={drag}
+        icon="✏️"
+        text="Edit"
+        direction={1}
+        actionStyle={styles.leftAction}
+        onProgress={updateProgress}
+      />
+    );
+  };
+
+  const fadeStyle = useAnimatedStyle(() => {
+    return {
+      opacity: 1 - sharedProg.value, // Fade to 50% opacity when fully swiped
+    };
+  });
+
   return (
     <ReanimatedSwipeable
       friction={2}
       enableTrackpadTwoFingerGesture
-      rightThreshold={300}
-      overshootLeft={false}
-      overshootRight={false}
+      rightThreshold={80}
+      leftThreshold={80}
       renderRightActions={RightAction}
       renderLeftActions={LeftAction}
       containerStyle={styles.swipeableContainer}
+      onSwipeableOpen={(direction) => {
+        console.log("swipeable open", direction);
+      }}
     >
-      <TouchableOpacity
-        style={styles.taskCard}
-        onPress={() => onPress(item)}
-        activeOpacity={0.7}
-      >
-        <View style={styles.taskHeader}>
-          <View style={styles.taskTitleRow}>
-            <View style={styles.taskIconContainer}>
-              <TaskIcon iconName={item.icon} color="#4A90E2" />
+      <Reanimated.View style={[styles.taskCard, fadeStyle]}>
+        <TouchableOpacity onPress={() => onPress(item)} activeOpacity={0.7}>
+          <View style={styles.taskHeader}>
+            <View style={styles.taskTitleRow}>
+              <View style={styles.taskIconContainer}>
+                <TaskIcon iconName={item.icon} color="#4A90E2" />
+              </View>
+              <Text style={styles.taskTitle}>{item.title}</Text>
             </View>
-            <Text style={styles.taskTitle}>{item.title}</Text>
+            <Text style={styles.stepCounter}>
+              {completedSteps}/{totalSteps}
+            </Text>
           </View>
-          <Text style={styles.stepCounter}>
-            {completedSteps}/{totalSteps}
+          <Text style={styles.taskDescription}>{item.description}</Text>
+          <View style={styles.progressBarContainer}>
+            <View
+              style={[styles.progressBar, { width: `${progressPercentage}%` }]}
+            />
+          </View>
+          <Text style={styles.progressText}>
+            {Math.round(progressPercentage)}% complete
           </Text>
-        </View>
-        <Text style={styles.taskDescription}>{item.description}</Text>
-        <View style={styles.progressBarContainer}>
-          <View
-            style={[styles.progressBar, { width: `${progressPercentage}%` }]}
-          />
-        </View>
-        <Text style={styles.progressText}>
-          {Math.round(progressPercentage)}% complete
-        </Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </Reanimated.View>
     </ReanimatedSwipeable>
   );
 }
@@ -97,7 +142,6 @@ export default function TaskCard({ item, onPress }: TaskCardProps) {
 const styles = StyleSheet.create({
   swipeableContainer: {
     flex: 1,
-    backgroundColor: "red",
   },
   taskCard: {
     backgroundColor: "#262629",

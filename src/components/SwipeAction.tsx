@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, StyleProp, ViewStyle } from "react-native";
 import Reanimated, {
   SharedValue,
   useAnimatedStyle,
+  useDerivedValue,
 } from "react-native-reanimated";
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
   actionStyle: StyleProp<ViewStyle>;
   direction?: number;
   offset?: number;
+  onProgress?: (progress: number) => void;
 }
 
 export default function SwipeAction({
@@ -22,16 +24,19 @@ export default function SwipeAction({
   actionStyle,
   direction = 1,
   offset = 50,
+  onProgress,
 }: Props) {
-  const styleAnimation = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          translateX: drag.value + direction * offset,
-        },
-      ],
-    };
-  });
+  const _ = useDerivedValue(() => {
+    "worklet"; // This function runs on UI thread
+
+    // Call the callback to update parent's shared value
+    if (onProgress) {
+      onProgress(prog.value);
+    }
+
+    return prog.value; // Return value (we don't use it, but useDerivedValue needs a return)
+  }, [prog]);
+
   return (
     <Reanimated.View style={styles.container}>
       <View style={[actionStyle, styles.innercontainer]}>
@@ -51,6 +56,8 @@ const styles = StyleSheet.create({
   innercontainer: {
     flex: 1,
     borderRadius: 16,
+    justifyContent: "center",
+    paddingHorizontal: 50,
   },
   action: {
     width: 80,
