@@ -34,7 +34,7 @@ export default function SwipeAction({
   });
   return (
     <Reanimated.View style={styles.container}>
-      <View style={actionStyle}>
+      <View style={[actionStyle, styles.innercontainer]}>
         <Text style={styles.actionIcon}>{icon}</Text>
         <Text style={styles.actionText}>{text}</Text>
       </View>
@@ -46,8 +46,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    width: "100%",
     marginBottom: 16,
+  },
+  innercontainer: {
+    flex: 1,
+    borderRadius: 16,
   },
   action: {
     width: 80,

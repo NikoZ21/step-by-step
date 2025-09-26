@@ -1,4 +1,4 @@
-1. Delete Task Ui and functionality using the swipable and hand gestures
+1. Delete Task Ui and functionality using the swipable and hand gesturesr
 2. Steps completion functionality
 3. Task completion look and maybe adding tab navigation for complete and incomplete tasks
 4. Further refactor addNewTaskModal.tsx so both adding and editing happens with one modal
