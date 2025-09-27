@@ -17,10 +17,12 @@ import IconSelector from "./IconSelector";
 import CustomInput from "./CustomInput";
 import Steps from "./Steps/index";
 
+import { useTasks } from "../../context/TasksContext";
+
 interface props {
   visible: boolean;
   onClose: () => void;
-  onCreateTask: (newTask: Task) => void;
+  // onCreateTask: (newTask: Task) => void;
 }
 
 const initialTask: Task = {
@@ -42,9 +44,11 @@ const initialTask: Task = {
 export default function AddNewTaskModal({
   visible,
   onClose,
-  onCreateTask,
-}: props) {
+}: // onCreateTask,
+props) {
   console.log("AddNewTaskModal rendered");
+
+  const tasksContext = useTasks();
 
   const [newTask, setNewTask] = useState<Task>(initialTask);
 
@@ -104,7 +108,8 @@ export default function AddNewTaskModal({
                   createdAt: new Date(),
                   updatedAt: new Date(),
                 };
-                onCreateTask(taskWithId);
+                // onCreateTask(taskWithId);
+                tasksContext.addTask(taskWithId);
                 onClose();
                 setNewTask(initialTask);
                 console.log(

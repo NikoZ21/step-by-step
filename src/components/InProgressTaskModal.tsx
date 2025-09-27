@@ -11,12 +11,13 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { Task, TaskStep } from "../models/task";
 import TaskIcon from "./Shared/TaskIcon";
+import { useTasks } from "../context/TasksContext";
 
 interface TaskModalProps {
   visible: boolean;
   task: Task | null;
   onClose: () => void;
-  onToggleStep: (taskId: string, stepId: number) => void;
+  // onToggleStep: (taskId: string, stepId: number) => void;
 }
 
 const getCompletedSteps = (steps: TaskStep[]) => {
@@ -27,15 +28,16 @@ export default function InProgressTaskModal({
   visible,
   task,
   onClose,
-  onToggleStep,
 }: TaskModalProps) {
   if (!task) return null;
+
+  const tasksContext = useTasks();
 
   const renderStepItem = (step: TaskStep, taskId: string) => (
     <TouchableOpacity
       key={step.id}
       style={[styles.stepItem, step.completed && styles.stepItemCompleted]}
-      onPress={() => onToggleStep(taskId, step.id)}
+      onPress={() => tasksContext.toggleStep(taskId, step.id)}
       activeOpacity={0.7}
     >
       <View style={styles.stepContent}>
