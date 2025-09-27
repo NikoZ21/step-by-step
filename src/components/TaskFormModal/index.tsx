@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   newTaskContainer: {
+    marginTop: 24,
     flex: 1,
     paddingHorizontal: 24,
   },
