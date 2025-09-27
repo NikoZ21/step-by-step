@@ -11,17 +11,20 @@ import SwipeAction from "./SwipeAction";
 
 import { Task, TaskStep } from "../../models/task";
 import { scaleWidth } from "../../utils/scaling";
+import { useTasks } from "../../context/TasksContext";
 
-interface TaskCardProps {
+interface Props {
   task: Task;
-  onPress: (task: Task) => void;
+  onOpen: () => void;
 }
 
 const getCompletedSteps = (steps: TaskStep[]) => {
   return steps.filter((step) => step.completed).length;
 };
 
-export default function TaskCard({ task, onPress }: TaskCardProps) {
+export default function TaskCard({ task, onOpen }: Props) {
+  const tasksContext = useTasks();
+
   const completedSteps = getCompletedSteps(task.steps);
   const totalSteps = task.steps.length;
   const progressPercentage = (completedSteps / totalSteps) * 100;
@@ -84,7 +87,8 @@ export default function TaskCard({ task, onPress }: TaskCardProps) {
       <Reanimated.View style={[styles.taskCard, fadeStyle]}>
         <TouchableOpacity
           onPress={() => {
-            onPress(task);
+            onOpen();
+            tasksContext.selectTask(task);
           }}
           activeOpacity={0.7}
         >

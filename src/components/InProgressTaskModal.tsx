@@ -15,9 +15,7 @@ import { useTasks } from "../context/TasksContext";
 
 interface TaskModalProps {
   visible: boolean;
-  task: Task | null;
   onClose: () => void;
-  // onToggleStep: (taskId: string, stepId: number) => void;
 }
 
 const getCompletedSteps = (steps: TaskStep[]) => {
@@ -26,12 +24,11 @@ const getCompletedSteps = (steps: TaskStep[]) => {
 
 export default function InProgressTaskModal({
   visible,
-  task,
   onClose,
 }: TaskModalProps) {
-  if (!task) return null;
-
   const tasksContext = useTasks();
+  const task = tasksContext.selectedTask;
+  if (!task) return null;
 
   const renderStepItem = (step: TaskStep, taskId: string) => (
     <TouchableOpacity
@@ -95,7 +92,13 @@ export default function InProgressTaskModal({
                 </View>
                 <Text style={styles.modalTitle}>{task.title}</Text>
               </View>
-              <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => {
+                  onClose();
+                  tasksContext.selectTask(null);
+                }}
+              >
                 <Text style={styles.closeButtonText}>×</Text>
               </TouchableOpacity>
             </View>

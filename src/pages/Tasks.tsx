@@ -15,24 +15,14 @@ import { Task } from "../models/task";
 
 export default function Tasks() {
   const tasksContext = useTasks();
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [newTaskModalVisible, setNewTaskModalVisible] = useState(false);
-
-  const openTaskModal = (task: Task) => {
-    setSelectedTask(task);
-    setModalVisible(true);
-  };
-
-  const closeModal = () => {
-    setModalVisible(false);
-    setSelectedTask(null);
-  };
 
   const renderTaskCard = ({ item }: { item: Task }) => (
     <TaskCard
       task={item}
-      onPress={() => {
+      onOpen={() => {
         setModalVisible(true);
       }}
     />
@@ -73,8 +63,9 @@ export default function Tasks() {
       {/* Task Detail Modal */}
       <InProgressTaskModal
         visible={modalVisible}
-        task={selectedTask}
-        onClose={closeModal}
+        onClose={() => {
+          setModalVisible(false);
+        }}
       />
 
       {/* New Task Modal */}

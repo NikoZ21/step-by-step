@@ -4,10 +4,10 @@ import { Task } from "../models/task";
 import TasksContext from "../context/TasksContext";
 
 import {
-  getTasks,
-  addTask,
-  updateTask,
-  deleteTask,
+  getTasksFromStorage,
+  addTaskToStorage,
+  updateTaskInStorage,
+  deleteTaskFromStorage,
 } from "../services/taskStorage";
 
 interface Props {
@@ -21,28 +21,32 @@ export default function TasksProvider({ children }: Props) {
   // Load tasks when component mounts
   useEffect(() => {
     const loadTasks = async () => {
-      const initialTasks = await getTasks();
+      const initialTasks = await getTasksFromStorage();
       setTasks(initialTasks);
     };
 
     loadTasks();
   }, []);
 
-  const selectTask = (task: Task) => {
+  const selectTask = (task: Task | null) => {
     setSelectedTask(task);
+  };
+
+  const getSelectedTask = () => {
+    return selectedTask;
   };
 
   const addTask = (task: Task) => {
     setTasks([...tasks, task]);
-    addTask(task);
+    addTaskToStorage(task);
   };
   const updateTask = (task: Task) => {
     setTasks(tasks.map((t) => (t.id === task.id ? task : t)));
-    updateTask(task);
+    updateTaskInStorage(task);
   };
   const deleteTask = (taskId: string) => {
     setTasks(tasks.filter((t) => t.id !== taskId));
-    deleteTask(taskId);
+    deleteTaskFromStorage(taskId);
   };
 
   const toggleStep = (taskId: string, stepId: number) => {
@@ -64,7 +68,17 @@ export default function TasksProvider({ children }: Props) {
 
   return (
     <TasksContext.Provider
-      value={{ tasks, setTasks, addTask, updateTask, deleteTask, toggleStep }}
+      value={{
+        tasks,
+        selectedTask,
+        setTasks,
+        addTask,
+        updateTask,
+        deleteTask,
+        toggleStep,
+        selectTask,
+        getSelectedTask,
+      }}
     >
       {children}
     </TasksContext.Provider>

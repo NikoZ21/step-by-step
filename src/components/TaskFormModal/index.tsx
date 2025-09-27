@@ -22,7 +22,6 @@ import { useTasks } from "../../context/TasksContext";
 interface props {
   visible: boolean;
   onClose: () => void;
-  // onCreateTask: (newTask: Task) => void;
 }
 
 const initialTask: Task = {
@@ -41,11 +40,7 @@ const initialTask: Task = {
   updatedAt: new Date(),
 };
 
-export default function AddNewTaskModal({
-  visible,
-  onClose,
-}: // onCreateTask,
-props) {
+export default function AddNewTaskModal({ visible, onClose }: props) {
   console.log("AddNewTaskModal rendered");
 
   const tasksContext = useTasks();
@@ -67,7 +62,13 @@ props) {
         <View style={styles.modalContent}>
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>New Task</Text>
-            <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => {
+                onClose();
+                setNewTask(initialTask);
+              }}
+            >
               <Text style={styles.closeButtonText}>×</Text>
             </TouchableOpacity>
           </View>
@@ -108,7 +109,6 @@ props) {
                   createdAt: new Date(),
                   updatedAt: new Date(),
                 };
-                // onCreateTask(taskWithId);
                 tasksContext.addTask(taskWithId);
                 onClose();
                 setNewTask(initialTask);
