@@ -29,3 +29,9 @@ export const updateTask = async (task: Task): Promise<void> => {
 
   console.error("Task not found");
 };
+
+export const deleteTask = async (taskId: string): Promise<void> => {
+  const tasks = await getTasks();
+  const filteredTasks = tasks.filter((t) => t.id !== taskId);
+  await AsyncStorage.setItem(TASKS_KEY, JSON.stringify(filteredTasks));
+};
