@@ -1,9 +1,9 @@
-import { TouchableOpacity } from "react-native";
-import { View, Text } from "react-native";
-import { StyleSheet } from "react-native";
+import { TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { Task, TaskStep } from "../../../models/task";
-import Step from "./Step";
+import { Task, TaskStep } from '../../../models/task';
+import Step from './Step';
 
 export default function Steps({
   newTask,
@@ -22,7 +22,7 @@ export default function Steps({
           onPress={() => {
             const newStep: TaskStep = {
               id: newTask.steps.length + 1, // Simple ID generation
-              description: "",
+              description: '',
               completed: false,
             };
             updateNewTask({ steps: [...newTask.steps, newStep] });
@@ -40,9 +40,7 @@ export default function Steps({
           index={index}
           totalSteps={newTask.steps.length}
           updateStep={(text: string) => {
-            const updatedSteps = newTask.steps.map((s, i) =>
-              i === index ? { ...s, description: text } : s
-            );
+            const updatedSteps = newTask.steps.map((s, i) => (i === index ? { ...s, description: text } : s));
             updateNewTask({ steps: updatedSteps });
           }}
           removeStep={() => {
@@ -60,26 +58,26 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   stepsHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingBottom: 16,
   },
   inputLabel: {
     fontSize: 16,
-    fontWeight: "600",
-    color: "#FFFFFF",
+    fontWeight: '600',
+    color: '#FFFFFF',
     marginBottom: 8,
   },
   addStepButton: {
-    backgroundColor: "#4A4A4E",
+    backgroundColor: '#4A4A4E',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 8,
   },
   addStepButtonText: {
     fontSize: 14,
-    color: "#4A90E2",
-    fontWeight: "500",
+    color: '#4A90E2',
+    fontWeight: '500',
   },
 });

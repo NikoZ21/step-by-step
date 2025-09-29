@@ -1,14 +1,14 @@
-import { ReactNode, useEffect } from "react";
-import { useState } from "react";
-import { Task } from "../models/task";
-import TasksContext from "../context/TasksContext";
+import { ReactNode, useEffect } from 'react';
+import { useState } from 'react';
+import { Task } from '../models/task';
+import TasksContext from '../context/TasksContext';
 
 import {
   getTasksFromStorage,
   addTaskToStorage,
   updateTaskInStorage,
   deleteTaskFromStorage,
-} from "../services/taskStorage";
+} from '../services/taskStorage';
 
 interface Props {
   children: ReactNode;
@@ -41,29 +41,53 @@ export default function TasksProvider({ children }: Props) {
     addTaskToStorage(task);
   };
   const updateTask = (task: Task) => {
-    setTasks(tasks.map((t) => (t.id === task.id ? task : t)));
+    setTasks(tasks.map(t => (t.id === task.id ? task : t)));
     updateTaskInStorage(task);
   };
   const deleteTask = (taskId: string) => {
-    setTasks(tasks.filter((t) => t.id !== taskId));
+    setTasks(tasks.filter(t => t.id !== taskId));
     deleteTaskFromStorage(taskId);
   };
 
   const toggleStep = (taskId: string, stepId: number) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
+    setTasks(prevTasks => {
+      const updatedTasks = prevTasks.map(task =>
         task.id === taskId
           ? {
               ...task,
-              steps: task.steps.map((step) =>
-                step.id === stepId
-                  ? { ...step, completed: !step.completed }
+              steps: task.steps.map(step =>
+                step.id === stepId && !step.completed
+                  ? { ...step, completed: true } // Only allow completion, never uncomplete
                   : step
               ),
+              updatedAt: new Date(),
             }
           : task
-      )
-    );
+      );
+
+      // Update selectedTask if it's the same task being modified
+      if (selectedTask && selectedTask.id === taskId) {
+        const updatedSelectedTask = updatedTasks.find(t => t.id === taskId);
+        if (updatedSelectedTask) {
+          setSelectedTask(updatedSelectedTask);
+        }
+      }
+
+      return updatedTasks;
+    });
+
+    // Update storage with the same logic
+    const updatedTask = tasks.find(t => t.id === taskId);
+    if (updatedTask) {
+      const taskToUpdate = {
+        ...updatedTask,
+        steps: updatedTask.steps.map(step =>
+          step.id === stepId && !step.completed ? { ...step, completed: true } : step
+        ),
+        updatedAt: new Date(),
+      };
+      updateTaskInStorage(taskToUpdate);
+    }
   };
 
   return (
