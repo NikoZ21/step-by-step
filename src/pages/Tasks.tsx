@@ -7,23 +7,46 @@ import {
   StyleSheet,
 } from "react-native";
 import InProgressTaskModal from "../components/InProgressTaskModal";
-import AddNewTaskModal from "../components/TaskFormModal";
+import TaskFormModal from "../components/TaskFormModal";
 import TaskCard from "../components/TaskCard";
 
 import { useTasks } from "../context/TasksContext";
 import { Task } from "../models/task";
+
+const initialTask: Task = {
+  id: "",
+  title: "",
+  description: "",
+  icon: "Zap",
+  steps: [
+    {
+      id: 1,
+      description: "",
+      completed: false,
+    },
+  ],
+  createdAt: new Date(),
+  updatedAt: new Date(),
+};
 
 export default function Tasks() {
   const tasksContext = useTasks();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [newTaskModalVisible, setNewTaskModalVisible] = useState(false);
+  const [taskFormInitialValues, setTaskFormInitialValues] =
+    useState<Task>(initialTask);
 
   const renderTaskCard = ({ item }: { item: Task }) => (
     <TaskCard
       task={item}
       onOpen={() => {
         setModalVisible(true);
+      }}
+      onOpenFormModal={() => {
+        setNewTaskModalVisible(true);
+        setTaskFormInitialValues(item);
+        console.log("onOpenFormModal with the values: ", JSON.stringify(item));
       }}
     />
   );
@@ -44,6 +67,7 @@ export default function Tasks() {
             activeOpacity={0.7}
             onPress={() => {
               setNewTaskModalVisible(true);
+              setTaskFormInitialValues(initialTask);
             }}
           >
             <Text style={styles.addButtonText}>+</Text>
@@ -69,8 +93,9 @@ export default function Tasks() {
       />
 
       {/* New Task Modal */}
-      <AddNewTaskModal
+      <TaskFormModal
         visible={newTaskModalVisible}
+        initialValues={taskFormInitialValues}
         onClose={() => {
           setNewTaskModalVisible(false);
         }}
