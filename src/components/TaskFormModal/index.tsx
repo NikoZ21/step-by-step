@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -22,6 +22,7 @@ import { useTasks } from "../../context/TasksContext";
 interface props {
   visible: boolean;
   onClose: () => void;
+  initialValues: Task;
 }
 
 const initialTask: Task = {
@@ -40,8 +41,15 @@ const initialTask: Task = {
   updatedAt: new Date(),
 };
 
-export default function AddNewTaskModal({ visible, onClose }: props) {
-  console.log("AddNewTaskModal rendered");
+export default function TaskFormModal({
+  visible,
+  onClose,
+  initialValues,
+}: props) {
+  console.log(
+    "TaskFormModal  with the values: ",
+    JSON.stringify(initialValues)
+  );
 
   const tasksContext = useTasks();
 
@@ -49,6 +57,27 @@ export default function AddNewTaskModal({ visible, onClose }: props) {
 
   const updateNewTask = (updates: Partial<Task>) => {
     setNewTask({ ...newTask, ...updates });
+  };
+
+  useEffect(() => {
+    setNewTask(initialValues);
+  }, [initialValues]);
+
+  const handleCreateTask = () => {
+    if (newTask.id !== "") {
+      tasksContext.updateTask(newTask);
+    } else {
+      const taskWithId = {
+        ...newTask,
+        id: nanoid(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      tasksContext.addTask(taskWithId);
+    }
+
+    onClose();
+    setNewTask(initialTask);
   };
 
   return (
@@ -102,21 +131,7 @@ export default function AddNewTaskModal({ visible, onClose }: props) {
             {/* Create Button */}
             <TouchableOpacity
               style={styles.createTaskButton}
-              onPress={() => {
-                const taskWithId = {
-                  ...newTask,
-                  id: nanoid(),
-                  createdAt: new Date(),
-                  updatedAt: new Date(),
-                };
-                tasksContext.addTask(taskWithId);
-                onClose();
-                setNewTask(initialTask);
-                console.log(
-                  " =>>>>>>>> newTask created: ",
-                  JSON.stringify(taskWithId)
-                );
-              }}
+              onPress={handleCreateTask}
             >
               <Text style={styles.createTaskButtonText}>Create Task</Text>
             </TouchableOpacity>

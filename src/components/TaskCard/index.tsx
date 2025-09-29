@@ -16,13 +16,14 @@ import { useTasks } from "../../context/TasksContext";
 interface Props {
   task: Task;
   onOpen: () => void;
+  onOpenFormModal: () => void;
 }
 
 const getCompletedSteps = (steps: TaskStep[]) => {
   return steps.filter((step) => step.completed).length;
 };
 
-export default function TaskCard({ task, onOpen }: Props) {
+export default function TaskCard({ task, onOpen, onOpenFormModal }: Props) {
   const tasksContext = useTasks();
 
   const completedSteps = getCompletedSteps(task.steps);
@@ -81,7 +82,11 @@ export default function TaskCard({ task, onOpen }: Props) {
       renderLeftActions={LeftAction}
       containerStyle={styles.swipeableContainer}
       onSwipeableOpen={(direction) => {
-        console.log("swipeable open", direction);
+        if (direction === "right") {
+          onOpenFormModal();
+        } else if (direction === "left") {
+          tasksContext.deleteTask(task.id);
+        }
       }}
     >
       <Reanimated.View style={[styles.taskCard, fadeStyle]}>
